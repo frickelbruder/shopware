@@ -33,7 +33,7 @@ class DqlHelper
 {
     /**
      * Reference to the PDO object
-     * @var \PDO
+     * @var \Enlight_Components_Db_Adapter_Pdo_Mysql
      */
     protected $db;
 
@@ -121,12 +121,12 @@ class DqlHelper
     /**
      * Constructor
      *
-     * @param \PDO $db
+     * @param \Enlight_Components_Db_Adapter_Pdo_Mysql $db
      * @param \Shopware\Components\Model\ModelManager $em
      * @param \Enlight_Event_EventManager $eventManager
      */
     public function __construct(
-        \PDO $db,
+        \Enlight_Components_Db_Adapter_Pdo_Mysql $db,
         \Shopware\Components\Model\ModelManager $em,
         \Enlight_Event_EventManager $eventManager
     ) {
@@ -150,7 +150,7 @@ class DqlHelper
     /**
      * Returns a reference to our PDO object
      *
-     * @return \PDO
+     * @return \Enlight_Components_Db_Adapter_Pdo_Mysql
      */
     public function getDb()
     {

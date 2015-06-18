@@ -450,7 +450,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Tax $tax
      */
-    public function setTax($tax)
+    public function setTax(Tax $tax)
     {
         $this->tax = $tax;
     }
@@ -466,7 +466,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Product\Price[] $prices
      */
-    public function setPrices($prices)
+    public function setPrices(array $prices)
     {
         $this->prices = $prices;
     }
@@ -482,7 +482,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Product\Manufacturer $manufacturer
      */
-    public function setManufacturer($manufacturer)
+    public function setManufacturer(Manufacturer $manufacturer)
     {
         $this->manufacturer = $manufacturer;
     }
@@ -498,7 +498,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Media $cover
      */
-    public function setCover($cover)
+    public function setCover(Media $cover)
     {
         $this->cover = $cover;
     }
@@ -514,7 +514,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Product\Price $cheapestPrice
      */
-    public function setCheapestPrice($cheapestPrice)
+    public function setCheapestPrice(Price $cheapestPrice)
     {
         $this->cheapestPrice = $cheapestPrice;
     }
@@ -838,7 +838,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule[] $priceRules
      */
-    public function setPriceRules($priceRules)
+    public function setPriceRules(array $priceRules)
     {
         $this->priceRules = $priceRules;
     }
@@ -854,7 +854,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param \Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule $cheapestPriceRule
      */
-    public function setCheapestPriceRule($cheapestPriceRule)
+    public function setCheapestPriceRule(PriceRule $cheapestPriceRule)
     {
         $this->cheapestPriceRule = $cheapestPriceRule;
     }
@@ -1022,7 +1022,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param VoteAverage $voteAverage
      */
-    public function setVoteAverage($voteAverage)
+    public function setVoteAverage(VoteAverage $voteAverage)
     {
         $this->voteAverage = $voteAverage;
     }
@@ -1054,7 +1054,7 @@ class ListProduct extends BaseProduct implements \JsonSerializable
     /**
      * @param Price $cheapestUnitPrice
      */
-    public function setCheapestUnitPrice($cheapestUnitPrice)
+    public function setCheapestUnitPrice(Price $cheapestUnitPrice)
     {
         $this->cheapestUnitPrice = $cheapestUnitPrice;
     }

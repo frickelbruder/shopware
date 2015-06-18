@@ -290,7 +290,7 @@ class StoreClient
             $this->handleRequestException($e);
         }
 
-        return $response;
+        return g$response;
     }
 
     /**

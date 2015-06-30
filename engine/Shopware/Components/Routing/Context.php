@@ -24,7 +24,7 @@
 
 namespace Shopware\Components\Routing;
 
-use Enlight_Controller_Request_RequestHttp as EnlightRequest;
+use Enlight_Controller_Request_Request as EnlightRequest;
 use Shopware_Components_Config as ShopwareConfig;
 use \Shopware\Models\Shop\Shop as ShopwareShop;
 

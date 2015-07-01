@@ -42,7 +42,7 @@ class Db
         $db = \Enlight_Components_Db::factory($adapter, $options);
 
         // Reset sql_mode "STRICT_TRANS_TABLES" that will be default in MySQL 5.6
-        $db->exec("SET @@session.sql_mode = ''");
+        $db->exec("SET @@session.sql_mode = 'NO_ENGINE_SUBSTITUTION'");
 
         \Zend_Db_Table_Abstract::setDefaultAdapter($db);
 

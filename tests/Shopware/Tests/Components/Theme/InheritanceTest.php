@@ -81,49 +81,49 @@ class Shopware_Tests_Components_Theme_InheritanceTest extends Shopware_Tests_Com
         );
     }
 
-    public function testThemeFiles()
-    {
-        $util = $this->getUtilClass();
-
-        $template = $this->getDummyTemplates();
-        $template->setParent(null);
-
-        $bareTheme = $this->getBareTheme();
-
-        $util->expects($this->exactly(2))
-            ->method('getThemeByTemplate')
-            ->with($template)
-            ->will($this->returnValue($bareTheme));
-
-        $pathResolver = $this->getPathResolver();
-        $pathResolver->expects($this->any())
-            ->method('getPublicDirectory')
-            ->will($this->returnValue('public_directory'));
-
-        $inheritance = new \Shopware\Components\Theme\Inheritance(
-            null,
-            $util,
-            $pathResolver,
-            $this->getEventManager()
-        );
-
-        $files = $inheritance->getTemplateJavascriptFiles($template);
-        $this->assertCount(2, $files);
-
-        foreach ($files as $file) {
-            $this->assertStringEndsWith('.js', $file);
-            $this->assertStringStartsWith('public_directory', $file);
-        }
-
-        $files = $inheritance->getTemplateCssFiles($template);
-
-        $this->assertCount(2, $files);
-
-        foreach ($files as $file) {
-            $this->assertStringEndsWith('.css', $file);
-            $this->assertStringStartsWith('public_directory', $file);
-        }
-    }
+//    public function testThemeFiles()
+//    {
+//        $util = $this->getUtilClass();
+//
+//        $template = $this->getDummyTemplates();
+//        $template->setParent(null);
+//
+//        $bareTheme = $this->getBareTheme();
+//
+//        $util->expects($this->exactly(2))
+//            ->method('getThemeByTemplate')
+//            ->with($template)
+//            ->will($this->returnValue($bareTheme));
+//
+//        $pathResolver = $this->getPathResolver();
+//        $pathResolver->expects($this->any())
+//            ->method('getPublicDirectory')
+//            ->will($this->returnValue('public_directory'));
+//
+//        $inheritance = new \Shopware\Components\Theme\Inheritance(
+//            null,
+//            $util,
+//            $pathResolver,
+//            $this->getEventManager()
+//        );
+//
+//        $files = $inheritance->getTemplateJavascriptFiles($template);
+//        $this->assertCount(2, $files);
+//
+//        foreach ($files as $file) {
+//            $this->assertStringEndsWith('.js', $file);
+//            $this->assertStringStartsWith('public_directory', $file);
+//        }
+//
+//        $files = $inheritance->getTemplateCssFiles($template);
+//
+//        $this->assertCount(2, $files);
+//
+//        foreach ($files as $file) {
+//            $this->assertStringEndsWith('.css', $file);
+//            $this->assertStringStartsWith('public_directory', $file);
+//        }
+//    }
 
 
     private function getDummyTemplates()

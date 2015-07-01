@@ -481,57 +481,60 @@ class LegacyEventManager
                 )
             );
         } else {
-            foreach ($getArticle["sBlockPrices"] as &$blockPrice) {
-                $blockPrice["price"] = $this->eventManager->filter(
-                    'sArticles::sCalculatingPrice::replace',
-                    $blockPrice["price"],
-                    array(
-                        'subject' => $module,
-                        'price' => $blockPrice["price"],
-                        'tax' => $getArticle["tax"],
-                        'taxId' => $getArticle["taxID"],
-                        'article' => $getArticle
-                    )
-                );
-                $blockPrice["price"] = $this->eventManager->filter(
-                    'sArticles::sCalculatingPrice::after',
-                    $blockPrice["price"],
-                    array(
-                        'subject' => $module,
-                        'price' => $blockPrice["price"],
-                        'tax' => $getArticle["tax"],
-                        'taxId' => $getArticle["taxID"],
-                        'article' => $getArticle
-                    )
-                );
 
-                if (!$blockPrice['pseudoprice']) {
-                    continue;
+            if (isset($getArticle['sBlockPrices'])) {
+                foreach ($getArticle["sBlockPrices"] as &$blockPrice) {
+                    $blockPrice["price"] = $this->eventManager->filter(
+                        'sArticles::sCalculatingPrice::replace',
+                        $blockPrice["price"],
+                        array(
+                            'subject' => $module,
+                            'price' => $blockPrice["price"],
+                            'tax' => $getArticle["tax"],
+                            'taxId' => $getArticle["taxID"],
+                            'article' => $getArticle
+                        )
+                    );
+                    $blockPrice["price"] = $this->eventManager->filter(
+                        'sArticles::sCalculatingPrice::after',
+                        $blockPrice["price"],
+                        array(
+                            'subject' => $module,
+                            'price' => $blockPrice["price"],
+                            'tax' => $getArticle["tax"],
+                            'taxId' => $getArticle["taxID"],
+                            'article' => $getArticle
+                        )
+                    );
+
+                    if (!$blockPrice['pseudoprice']) {
+                        continue;
+                    }
+
+                    $blockPrice["pseudoprice"] = $this->eventManager->filter(
+                        'sArticles::sCalculatingPrice::replace',
+                        $blockPrice["pseudoprice"],
+                        array(
+                            'subject' => $module,
+                            'price' => $blockPrice["pseudoprice"],
+                            'tax' => $getArticle["tax"],
+                            'taxId' => $getArticle["taxID"],
+                            'article' => $getArticle
+                        )
+                    );
+
+                    $blockPrice["pseudoprice"] = $this->eventManager->filter(
+                        'sArticles::sCalculatingPrice::after',
+                        $blockPrice["pseudoprice"],
+                        array(
+                            'subject' => $module,
+                            'price' => $blockPrice["pseudoprice"],
+                            'tax' => $getArticle["tax"],
+                            'taxId' => $getArticle["taxID"],
+                            'article' => $getArticle
+                        )
+                    );
                 }
-
-                $blockPrice["pseudoprice"] = $this->eventManager->filter(
-                    'sArticles::sCalculatingPrice::replace',
-                    $blockPrice["pseudoprice"],
-                    array(
-                        'subject' => $module,
-                        'price' => $blockPrice["pseudoprice"],
-                        'tax' => $getArticle["tax"],
-                        'taxId' => $getArticle["taxID"],
-                        'article' => $getArticle
-                    )
-                );
-
-                $blockPrice["pseudoprice"] = $this->eventManager->filter(
-                    'sArticles::sCalculatingPrice::after',
-                    $blockPrice["pseudoprice"],
-                    array(
-                        'subject' => $module,
-                        'price' => $blockPrice["pseudoprice"],
-                        'tax' => $getArticle["tax"],
-                        'taxId' => $getArticle["taxID"],
-                        'article' => $getArticle
-                    )
-                );
             }
         }
 
@@ -663,7 +666,7 @@ class LegacyEventManager
 
         $getArticle["sVoteAverange"] = $this->eventManager->filter(
             'sArticles::sGetArticlesAverangeVote::replace',
-            $getArticle["sVoteAverange"],
+            isset($getArticle["sVoteAverange"]) ?: [],
             array(
                 'subject' => $module,
                 'article' => $getArticle["articleID"]
@@ -672,7 +675,7 @@ class LegacyEventManager
 
         $getArticle["sVoteAverange"] = $this->eventManager->filter(
             'sArticles::sGetArticlesAverangeVote::after',
-            $getArticle["sVoteAverange"],
+            isset($getArticle["sVoteAverange"]) ?: [],
             array(
                 'subject' => $module,
                 'article' => $getArticle["articleID"]
@@ -681,7 +684,7 @@ class LegacyEventManager
 
         $getArticle["sVoteComments"] = $this->eventManager->filter(
             'sArticles::sGetArticlesVotes::replace',
-            $getArticle["sVoteComments"],
+            isset($getArticle["sVoteComments"]) ?: [],
             array(
                 'subject' => $module,
                 'article' => $getArticle["articleID"]
@@ -690,7 +693,7 @@ class LegacyEventManager
 
         $getArticle["sVoteComments"] = $this->eventManager->filter(
             'sArticles::sGetArticlesVotes::after',
-            $getArticle["sVoteComments"],
+            isset($getArticle["sVoteComments"]) ?: [],
             array(
                 'subject' => $module,
                 'article' => $getArticle["articleID"]

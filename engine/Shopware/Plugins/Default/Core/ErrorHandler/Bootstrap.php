@@ -177,7 +177,7 @@ class Shopware_Plugins_Core_ErrorHandler_Bootstrap extends Shopware_Components_P
             return;
         }
 
-        if ($this->_errorLog) {
+        if (true || $this->_errorLog) {
             $hash_id = md5($errno . $errstr . $errfile . $errline);
             if (!isset($this->_errorList[$hash_id])) {
                 $errna = isset($this->_errorLevelList[$errno]) ? $this->_errorLevelList[$errno] : '';
@@ -197,18 +197,22 @@ class Shopware_Plugins_Core_ErrorHandler_Bootstrap extends Shopware_Components_P
         switch ($errno) {
             case 0:
             case E_NOTICE:
-            case E_WARNING:
             case E_USER_NOTICE:
-            case E_RECOVERABLE_ERROR:
-            case E_STRICT:
             case defined('E_DEPRECATED') ? E_DEPRECATED : 0:
             case defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : 0:
-                break;
+            break;
+            case E_STRICT:
+
+            case E_WARNING:
+
+            case E_RECOVERABLE_ERROR:
             case E_CORE_WARNING:
             case E_USER_WARNING:
             case E_ERROR:
+
             case E_USER_ERROR:
             case E_CORE_ERROR:
+                throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
                 break;
             default:
                 throw new ErrorException($errstr, 0, $errno, $errfile, $errline);

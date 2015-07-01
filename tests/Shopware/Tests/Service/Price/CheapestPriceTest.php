@@ -2,7 +2,6 @@
 
 namespace Shopware\Tests\Service\Price;
 
-use Shopware\Bundle\StoreFrontBundle\Struct\Context;
 use Shopware\Bundle\StoreFrontBundle\Struct\ProductContext;
 use Shopware\Tests\Service\TestCase;
 
@@ -89,7 +88,6 @@ class CheapestPriceTest extends TestCase
         $this->assertEquals(80, $cheapestPrice->getCalculatedPrice());
         $this->assertEquals(90, $cheapestPrice->getCalculatedPseudoPrice());
         $this->assertEquals(160, $cheapestPrice->getCalculatedReferencePrice());
-
     }
 
     public function testCheapestWithMinPurchase()

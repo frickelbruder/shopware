@@ -60,6 +60,7 @@ class Shopware_Tests_Components_Theme_Base extends Enlight_Components_Test_TestC
     protected function getUtilClass()
     {
         return $this->getMockBuilder('Shopware\Components\Theme\Util')
+            ->disableOriginalConstructor()
             ->getMock();
     }
     /**

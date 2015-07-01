@@ -179,6 +179,12 @@ class Customer extends Resource
         $customer = new CustomerModel();
         $params = $this->prepareAssociatedData($params, $customer);
 
+
+//        if (isset($params['languageId'])) {
+//            $shopRepository = $this->getManager()->getRepository('Shopware\Models\Shop\Shop');
+//            $params['languageSubShop'] = $shopRepository->find($params['languageId']);
+//        }
+
         $customer->fromArray($params);
 
         $violations = $this->getManager()->validate($customer);
@@ -296,6 +302,8 @@ class Customer extends Resource
             if (!isset($params['shopId'])) {
                 $params['shopId'] = 1;
             }
+
+            if (!isset($params['lang']))
 
             if (!isset($params['active'])) {
                 $params['active'] = true;

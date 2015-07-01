@@ -37,32 +37,32 @@ class Product extends ListProduct implements \JsonSerializable
     /**
      * @var ListProduct[]
      */
-    protected $relatedProducts;
+    protected $relatedProducts = [];
 
     /**
      * @var ListProduct[]
      */
-    protected $similarProducts;
+    protected $similarProducts = [];
 
     /**
      * @var Product\Download[]
      */
-    protected $downloads;
+    protected $downloads = [];
 
     /**
      * @var Product\Link[]
      */
-    protected $links;
+    protected $links = [];
 
     /**
      * @var Media[]
      */
-    protected $media;
+    protected $media = [];
 
     /**
      * @var Product\Vote[]
      */
-    protected $votes;
+    protected $votes = [];
 
     /**
      * @var Set
@@ -72,7 +72,7 @@ class Product extends ListProduct implements \JsonSerializable
     /**
      * @var Group[]
      */
-    protected $configuration;
+    protected $configuration = [];
 
     /**
      * @param ListProduct $listProduct

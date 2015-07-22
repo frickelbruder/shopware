@@ -81,11 +81,11 @@ class Shopware_Plugins_Core_ErrorHandler_Bootstrap extends Shopware_Components_P
         E_USER_ERROR        => 'E_USER_ERROR',
         E_USER_WARNING      => 'E_USER_WARNING',
         E_USER_NOTICE       => 'E_USER_NOTICE',
-        E_ALL               => 'E_ALL',
         E_STRICT            => 'E_STRICT',
         E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
-        8192                => 'E_DEPRECATED',
-        16384               => 'E_USER_DEPRECATED',
+        E_DEPRECATED        => 'E_DEPRECATED',
+        E_USER_DEPRECATED   => 'E_USER_DEPRECATED',
+        E_ALL               => 'E_ALL',
     );
 
     /**
@@ -120,6 +120,7 @@ class Shopware_Plugins_Core_ErrorHandler_Bootstrap extends Shopware_Components_P
      */
     public function onStartDispatch($args)
     {
+        // Register ErrorHanlder for all errors, including strict
         $this->registerErrorHandler(E_ALL | E_STRICT);
 
         if ($this->Config()->get('logMail')) {
@@ -195,27 +196,25 @@ class Shopware_Plugins_Core_ErrorHandler_Bootstrap extends Shopware_Components_P
         }
 
         switch ($errno) {
+            // ignored errors
             case 0:
+            case E_DEPRECATED:
             case E_NOTICE:
-            case E_USER_NOTICE:
-            case defined('E_DEPRECATED') ? E_DEPRECATED : 0:
-            case defined('E_USER_DEPRECATED') ? E_USER_DEPRECATED : 0:
-            break;
-            case E_STRICT:
-
             case E_WARNING:
+            case E_STRICT:
+                break;
 
-            case E_RECOVERABLE_ERROR:
+            // errors that throw
+            case E_USER_NOTICE:
+            case E_USER_DEPRECATED;
             case E_CORE_WARNING:
             case E_USER_WARNING:
             case E_ERROR:
-
             case E_USER_ERROR:
             case E_CORE_ERROR:
-                throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-                break;
+            case E_RECOVERABLE_ERROR:
             default:
-                throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+                throw new ErrorException($this->_errorLevelList[$errno].': '.$errstr, 0, $errno, $errfile, $errline);
                 break;
         }
 

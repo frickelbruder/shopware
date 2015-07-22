@@ -3,7 +3,7 @@
 namespace Shopware\Components\Compatibility;
 
 use Enlight\Event\SubscriberInterface;
-use Enlight_Controller_Request_RequestHttp as Request;
+use Enlight_Controller_Request_Request as Request;
 use Shopware\Bundle\SearchBundle\Condition\CategoryCondition;
 use Shopware\Bundle\SearchBundle\Condition\SearchTermCondition;
 use Shopware\Bundle\SearchBundle\Criteria;
@@ -277,7 +277,7 @@ class LegacySearchSubscriber implements SubscriberInterface
                 $result[$index] = 1;
             }
         }
-        
+
         return $result;
     }
 

@@ -762,10 +762,10 @@ class sArticles
      *
      * @param string $orderNumber
      * @param int $categoryId
-     * @param Enlight_Controller_Request_RequestHttp $request
+     * @param Request $request
      * @return array
      */
-    public function getProductNavigation($orderNumber, $categoryId, Enlight_Controller_Request_RequestHttp $request)
+    public function getProductNavigation($orderNumber, $categoryId, Request $request)
     {
         $context = $this->contextService->getProductContext();
 
@@ -863,10 +863,10 @@ class sArticles
 
     /**
      * @param $categoryId
-     * @param Enlight_Controller_Request_RequestHttp $request
+     * @param Request $request
      * @return string
      */
-    private function buildCategoryLink($categoryId, Enlight_Controller_Request_RequestHttp $request)
+    private function buildCategoryLink($categoryId, Request $request)
     {
         $params = $this->queryAliasMapper->replaceLongParams($request->getParams());
 
@@ -2238,14 +2238,14 @@ class sArticles
      *
      * @param $categoryId
      * @param StoreFrontBundle\Struct\ProductContextInterface $context
-     * @param Enlight_Controller_Request_Request $request
+     * @param Request $request
      * @param SearchBundle\Criteria $criteria
      * @return array
      */
     private function getListing(
         $categoryId,
         StoreFrontBundle\Struct\ProductContextInterface $context,
-        Enlight_Controller_Request_Request $request,
+        Request $request,
         SearchBundle\Criteria $criteria
     ) {
         $searchResult = $this->searchService->search(

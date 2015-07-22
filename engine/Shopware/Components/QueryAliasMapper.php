@@ -121,9 +121,9 @@ class QueryAliasMapper
     /**
      * Replaces the query params with their mathing long form
      *
-     * @param \Enlight_Controller_Request_RequestHttp $request
+     * @param \Enlight_Controller_Request_Request $request
      */
-    public function replaceShortRequestQueries(\Enlight_Controller_Request_RequestHttp $request)
+    public function replaceShortRequestQueries(\Enlight_Controller_Request_Request $request)
     {
         foreach ($this->getQueryAliases() as $key => $alias) {
             $value = $request->getQuery($alias);

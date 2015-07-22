@@ -269,8 +269,8 @@ class Repository extends ModelRepository
     public function getFilterQueryBuilder($categoryIds, $filter)
     {
         $builder = $this->createQueryBuilder("blog");
-        $builder->leftJoin("blog.tags as tags")
-                ->leftJoin("blog.author as author")
+        $builder->leftJoin("blog.tags", 'tags')
+                ->leftJoin("blog.author", 'author')
                 ->where('blog.active = 1')
                 ->andWhere('blog.displayDate < :now')
                 ->setParameter("now", new \DateTime())

@@ -128,7 +128,10 @@ class Attribute extends Struct implements \JsonSerializable
      */
     public function get($name)
     {
-        return $this->storage[$name];
+        if (isset($this->storage[$name])) {
+            return $this->storage[$name];
+        }
+        return null;
     }
 
     /**

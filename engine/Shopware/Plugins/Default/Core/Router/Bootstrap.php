@@ -447,17 +447,17 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
         // Remove baseUrl from request url
         $url = $request->getRequestUri();
 
-        if ($requestShop && strpos($url, $requestShop->getBaseUrl()) === 0) {
+        if ($requestShop && strlen($requestShop->getBaseUrl()) > 0 && strpos($url, $requestShop->getBaseUrl()) === 0) {
             $url = substr($url, strlen($requestShop->getBaseUrl()));
         }
 
         $baseUrl = $request->getBaseUrl();
-        if (strpos($url, $baseUrl) === 0) {
+        if (strlen($baseUrl) > 0 && strpos($url, $baseUrl) === 0) {
             $url = substr($url, strlen($baseUrl));
         }
 
         $basePath = $newShop->getBasePath();
-        if (strpos($url, $basePath) === 0) {
+        if (strlen($basePath) > 0 && strpos($url, $basePath) === 0) {
             $url = substr($url, strlen($basePath));
         }
 

@@ -57,27 +57,15 @@ class UnitHydrator extends Hydrator
     /**
      * Extracts and unserialize the unit translation
      *
-     * @param $data
+     * @param array $data
      * @return array|mixed
      */
-    private function getTranslation($data)
+    private function getTranslation(array $data)
     {
-        if (!isset($data['__unit_translation'])
-            || empty($data['__unit_translation'])
-        ) {
-            $translation = [];
-        } else {
-            $result = unserialize($data['__unit_translation']) ? : [];
-            $translation = $result[$data['__unit_id']] ? : [];
-        }
+        $translation = $this->extractTranslation($data);
+        $fallbackTranslation = $this->extractFallbackTranslation($data);
 
-        if (isset($data['__unit_translation_fallback'])
-            && !empty($data['__unit_translation_fallback'])
-        ) {
-            $fallbackResult = unserialize($data['__unit_translation_fallback']) ? : [];
-            $fallbackTranslation = $fallbackResult[$data['__unit_id']] ? : [];
-            $translation += $fallbackTranslation;
-        }
+        $translation += $fallbackTranslation;
 
         if (empty($translation)) {
             return [];
@@ -135,5 +123,41 @@ class UnitHydrator extends Hydrator
         if (isset($data['__unit_maxpurchase'])) {
             $unit->setMaxPurchase((int) $data['__unit_maxpurchase']);
         }
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function extractTranslation(array $data)
+    {
+        if (!isset($data['__unit_translation']) || empty($data['__unit_translation'])) {
+            return [];
+        }
+
+        $result = @unserialize($data['__unit_translation']);
+        if (!$result) {
+            return [];
+        }
+
+        return isset($result[$data['__unit_id']]) ? $result[$data['__unit_id']] : [];
+    }
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    private function extractFallbackTranslation(array $data)
+    {
+        if (!isset($data['__unit_translation_fallback']) || empty($data['__unit_translation_fallback'])) {
+            return [];
+        }
+
+        $fallbackResult = @unserialize($data['__unit_translation_fallback']);
+        if (!$fallbackResult) {
+            return [];
+        }
+
+        return isset($fallbackResult[$data['__unit_id']]) ? $fallbackResult[$data['__unit_id']]: [];
     }
 }

@@ -170,8 +170,8 @@ class ProductProvider implements ProductProviderInterface
 
             $product->setCreatedAt(null);
             $product->setReleaseDate(null);
-            $product->setPrices(null);
-            $product->setPriceRules(null);
+            $product->setPrices(array());
+            $product->setPriceRules(array());
             $product->setCheapestPriceRule(null);
             $product->setCheapestPrice(null);
             $product->setCheapestUnitPrice(null);
